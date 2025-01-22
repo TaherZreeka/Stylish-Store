@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Customer\CoustomerMainController;
+use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\MasterCategoryContoller;
 use App\Http\Controllers\MasterSubCategoryController;
 use App\Http\Controllers\ProfileController;
@@ -93,6 +94,7 @@ Route::middleware(['auth', 'verified','rolemanager:vendor'])->group(function () 
         });
         Route::controller(SellerProductController::class)->group(function (){
             Route::get('/product/create','index')->name('vendor.product');
+            Route::post('/product/store','store_product')->name('vendor.product.store');
             Route::get('/product/manage','manage')->name('vendor.product.manage');
         });
 
@@ -117,7 +119,15 @@ Route::middleware(['auth', 'verified','rolemanager:customer'])->group(function (
         });
 
 // End Customer Routes
+         Route::controller(FrontEndController::class)->group(function (){
+            Route::get('/stylish/index','index')->name('front.index');
+            Route::get('/stylish/category','category')->name('front.category');
+            Route::get('/stylish/products','products')->name('front.products');
+            Route::get('/stylish/cart','cart')->name('front.cart');
+            Route::get('/stylish/contact','contact')->name('front.contact');
+            // Route::get('/stylish/index','index')->name('front.index');
 
+        });
 
 
 
